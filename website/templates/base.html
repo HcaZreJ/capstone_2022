@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- All of the above is just html basics for setting the page, setting a character unicode,
+        and something I don't understand, but just html must-do's to make the page -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+            crossorigin="anonymous"
+        />
+        <!-- The above two tags imported bootstrap, which is a CSS framework that has some built-in classes
+        that just make it a lot nicer to style your website. They are links to CDN networks, which allows
+        you to load (without downloading the file) a bunch of CSS and javascript. In this case, we are just
+        loading CSS (which can be told from them being stylesheets) -->
+        
+        <title>{% block title %}Home{% endblock %}</title>
+        <!-- Used Jinja in the above tag, inside the {% %}, you can write a bunch of different python things,
+        like if statements, a for loop, or even an expression you want to evaluate. The 'block' is a special 
+        Jinja thing, which means that you are defining a block in this base template that can be overriden in
+        a child template. Child template inherits the base template, but whatever you put inside of these blocks
+        can be changed. This line above allows our child templates to change the title of the page. -->
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- A bootstrap class navigation bar, creates a nice dark navbar. -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar">
+            <!-- Button placed in the navbar that will allow us to expand the navbar if we're on a mobile device. -->
+                <span class="navbar-toggler-icon"></span>
+                <!-- Inside of the button, we've placed an icon that we want for the navbar. -->
+            </button>
+            
+        </nav>
+
+        <script
+            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+           crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        <!-- The above three lines just loaded a bunch of javascripts related to bootstrap, which has
+        some fancy animations, some buttons, and stuff that uses javascript. Make sure it's loaded at
+        the bottom of the body tag, so that all other html goes above it. -->
+
+        <script
+	        type="text/javascript"
+	        src="{{ url_for('static', filename='index.js') }}"
+        ></script>
+        <!-- This is the script for loading a file from the static folder that's called index.js. 
+        The curly brackets {{}} are another thing in Jinja, which allows you to write python
+        variables, functions, expressions that will be evaluated. There are some rules on what
+        you can write in there, but the general idea is that.
+
+        python function url_for('name_of_folder', filename='file_name') used like this. It loads
+        the url for the static folder, it finds '/static' on our website, and loads the file. -->
+    </body>
+</html>
