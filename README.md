@@ -1,9 +1,12 @@
 <a name="readme-top"></a>
 
 ## Notes:
-* Most of the work done since the "Mid-Term Deliverable assignment" can be found in the  __test.ipynb__  notebook, which went through the entire process of web-crawling, news article data cleaning, pre-trained Google-news Word2Vec model load-in, news-to-vector transformation, user-preference learning, and prediction generation.
+* Most of the work done since the "Mid-Term Deliverable assignment" can be found in the  __test.ipynb__  notebook, which went through the entire process of web-crawling, news article data cleaning, pre-trained Google-news Word2Vec model load-in, news-to-vector transformation, user-preference learning, and prediction generation. 
+  * Important functions such as data cleaning, news-to-vector transformation are packaged into functions that can be copy-pasted and used anywhere.
+  * This means that although the application is not deployed because I have not figured it out fully, it is deployment-ready by simply copy-pasting the functions I've defined.
+  * The test.ipynb file is the project tested out locally. It is the main thing that is new and what I'm handing in for grading for the Full Draft. Other surrounding documents handed-in include this GitHub README document, updated Notion page (roadmap/process), and the HC&LO justification tables on the Notion page.
 * Web app deployment is attempted but encountered two major roadblocks:
-  * It will 100% cost money and quite expensive if faster computational speed is required
+  * It will 100% cost money and it will be quite expensive. The pre-trained GoogleNews model is 3.64GB on disk which forces one to buy an expensive one, because the model needs to be in RAM when the model is ran (so you need a server that has like at the very least 8GB of RAM).
   * There's a lot of new stuff to learn, and I am still trying to figure out how to get things up and running, and how to get them to communicate with each other.
 * I am leaning towards putting money onto this project (unless there is a free way to get a web app up and running because I did not find any), because I think it will be a project that looks good on my resume, in addition I do not think theoretical analysis is my thing (i.e. making a pivot and turning the project into a theoretical analysis paper)
 
@@ -135,6 +138,13 @@ The program includes sending requests to the Newsapi website to obtain recent ne
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Google News Word2Vec
+
+The program also uses a pre-trained Google News Word2Vec model that is 3.64GB on disk and stored in a binary file format. Before running the program, you would need to download the binary file, and store it under the same directory as the test.ipynb file.
+
+Documentation for pre-trained Google Word2Vec models can be found [here](https://code.google.com/archive/p/word2vec/), whereas the Google News Word2Vec model's binary file can be downloaded [here](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?resourcekey=0-wjGZdNAUop6WykTtMip30g).
+
 
 ## Usage
 
