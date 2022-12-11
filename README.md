@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 ## Notes:
 * Most of the work done since the "Mid-Term Deliverable assignment" can be found in the  __test.ipynb__  notebook, which went through the entire process of web-crawling, news article data cleaning, pre-trained Google-news Word2Vec model load-in, news-to-vector transformation, user-preference learning, and prediction generation.
 * Web app deployment is attempted but encountered two major roadblocks:
@@ -5,10 +7,39 @@
   * There's a lot of new stuff to learn, and I am still trying to figure out how to get things up and running, and how to get them to communicate with each other.
 * I am leaning towards putting money onto this project (unless there is a free way to get a web app up and running because I did not find any), because I think it will be a project that looks good on my resume, in addition I do not think theoretical analysis is my thing (i.e. making a pivot and turning the project into a theoretical analysis paper)
 
-# Capstone 2022
 
+<!-- PROJECT SHIELDS -->
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+ <!-- ADD A PROJECT IMAGE HERE LATER ONCE THERE IS ONE
+  <a href="https://github.com/HcaZreJ/capstone_2022">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
+ -->
+
+  <h1 align="center">Personalized News Recommender</h1>
+
+  <p align="center">
+    Gives personalized news recommendations after learning your news preference by asking you to rate 10 news articles.
+    <br />
+    <a href="https://github.com/HcaZreJ/capstone_2022"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/HcaZreJ/capstone_2022">View Demo</a>
+    ·
+    <a href="https://github.com/HcaZreJ/capstone_2022/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/HcaZreJ/capstone_2022/issues">Request Feature</a>
+  </p>
+</div>
+
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -93,7 +124,7 @@ Install the following packages into your local Python environment, by typing the
   pip install -U scikit-learn
   ```
 
-### Installation
+### Newsapi
 
 The program includes sending requests to the Newsapi website to obtain recent news article links, if you used mine in the ipynb notebook, it might return no results because I registered for a free developer's account that is limited to 200 requests per day. It is recommended that you register your own free Newsapi account and supply it to the notebook before running it. Here are the steps:
 
