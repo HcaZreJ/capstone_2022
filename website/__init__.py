@@ -48,5 +48,6 @@ def create_app():
 
 def create_database(app):
     if not path.exists('website/' + DB_NAME):
-        db.create_all(app=app)
+        with app.app_context():
+            db.create_all() # deleted argument app = app, added the above line of context
         print('Created Database!')
