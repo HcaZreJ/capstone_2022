@@ -9,6 +9,16 @@
   * It will 100% cost money and it will be quite expensive. The pre-trained GoogleNews model is 3.64GB on disk which forces one to buy an expensive one, because the model needs to be in RAM when the model is ran (so you need a server that has like at the very least 8GB of RAM).
   * There's a lot of new stuff to learn, and I am still trying to figure out how to get things up and running, and how to get them to communicate with each other.
 * I am leaning towards putting money onto this project (unless there is a free way to get a web app up and running because I did not find any), because I think it will be a project that looks good on my resume, in addition I do not think theoretical analysis is my thing (i.e. making a pivot and turning the project into a theoretical analysis paper)
+* Feedback requested:
+  * How do I get this thing deployed so that I can gather feedback from people? Is there anyway that I could get this thing deployed without spending money on it? The problem is that I cannot send the entire .ipynb notebook to people, ask them to download Python, install all of the packages necessary for the code to run, then run the notebook for 30 minutes just to get a few not so useful news article recommendations to read. On the other side, deploying off the internet is 100% going to cost money.
+  * Anything you think will be worthy for me to read into / learn about to make this project achieve its goal better: give users personalized news recommendation.
+  * HC&LO justifications. Please give comments on whether they would be applications that deserves a 4. If not, how can I improve them so that I can get a 4?
+* Summary of feedbacks applied:
+  * All feedbacks on HC&LO justifications are moved to the comment section of the respective HC&LO's page and acted upon. Most justifications have been updated and changes are marked with a blue color.
+  * Please check the "Feedback Received" section of the Notion page for all of the feedback that has been acted upon, which is marked out with a blue color and/or has a :white_check_mark: in front. To name a few:
+    * Web-scraping was conducted first, which is fully functional now and building up a dataset.
+    * Pre-trained Word-embedding model (Google News Word2Vec) is used for this first iteration of the product to speed up the development process as suggested.
+    * Representation of the dataset is now clear - News articles are all stored as vectors, converted using the Google News Word2Vec model. In addition a similarity matrix is created that makes cross-comparison between articles much faster.
 
 
 <!-- PROJECT SHIELDS -->
@@ -72,9 +82,7 @@
 
 ## About The Project
 
-Capstone Project of Data Science major student Zichen Zhu at Minerva University. The goal of the project is to develop a web app that will be
-able to give personalized news recommendations. The central idea of the project is that news articles can be converted into vectors using some
-Word2Vec model, which captures the semantic difference between them. Then if we learn the preference of users on the same semantic dimensions by asking them to rate how interested they are with several news articles, we will be able to generate personalized news recommendations by looking for news article vectors that is close to the preference vector of the user.
+Capstone Project of Data Science major student Zichen Zhu at Minerva University. The goal of the project is to develop a web app that will be able to give personalized news recommendations. News articles will be converted into vectors using some Word2Vec model, which captures the semantic difference between them. Then if we learn the preference of users on the same semantic dimensions by asking them to rate how interested they are with several news articles, we will be able to generate personalized news recommendations by looking for news article vectors that is close to the preference vector of the user.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -217,6 +225,7 @@ Project Link: [https://github.com/HcaZreJ/capstone_2022](https://github.com/HcaZ
 ## Acknowledgments
 
 * [Readme Template used](https://github.com/othneildrew/Best-README-Template)
+* [GitHub Markdown Emojis :stuck_out_tongue_closed_eyes:](https://gist.github.com/rxaviers/7360908)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
