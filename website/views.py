@@ -4,7 +4,6 @@ from .models import Note
 from . import db
 import json
 
-
 # We are going to define this file as a blueprint for our application
 # which means that it has a bunch of roots inside it (has a bunch of urls defined here)
 # it's a kind of way to separate our app out, so we don't have to have all of our views 
@@ -22,6 +21,7 @@ views = Blueprint('views', __name__)
 # A simple slash is put here, so this is the main page that one would go to when they
 # simply type in the url of our website
 @login_required
+# This defined function here home() will run, whenever we go to the above specified route
 def home():
     if request.method == 'POST':
         note = request.form.get('note')
@@ -35,7 +35,7 @@ def home():
             flash('Note added!', category='success')
 
     return render_template("home.html", user=current_user)
-# This defined function here home() will run, whenever we go to the above specified route
+
 
 @views.route('/delete-note', methods=['POST'])
 def delete_note():
