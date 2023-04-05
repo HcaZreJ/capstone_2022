@@ -1,0 +1,47 @@
+<!-- This is the Home page that renders after the user logins to their account.
+It generates 6 recommendations to the user based on the learned preference. -->
+
+{% extends "base.html" %} {% block title %}User Home{% endblock %} {% block
+content %}
+<br />
+
+<!-- Create a form so that we can receive ratings from the user. -->
+<form method="post">
+  <h3 align="center">Welcome, {{ user.first_name }}</h3>
+
+  <p class="text-center">Here are a few recommendations for you:</p>
+
+  <p class="text-center">
+    Read these news articles, and give us a rating on how often would you like
+    to see news articles like this, so that we can keep improving the
+    recommendations.
+  </p>
+
+  <p class="text-center">0 = I do not want to see this at all.</p>
+  <p class="text-center">5 = I want to see this all the time.</p>
+
+  <p class="text-center">
+    A high score prompts the recommender to recommend similar articles, while a
+    low score prompts the recommender to recommend less similar articles.
+  </p>
+
+  <!-- Bootstrap class to show a list of items -->
+  <ul
+    class="list-group"
+    id="recommendations"
+  >
+    <!-- Looping over all 6 recommendations generated, display them one-by-one. -->
+    {% for recommendation in recommendations %}
+    <li class="list-group-item">
+      <!-- Still needs some form here that allows User to give some sort of rating here -->
+
+      <a href="{{ recommendation['url'] }}"
+        ><h3>{{ recommendation['title'] }}</h3></a
+      >
+      <p>{{ recommendation['content'] }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</form>
+
+{% endblock %}

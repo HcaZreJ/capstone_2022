@@ -201,8 +201,9 @@ Project Link: [https://github.com/HcaZreJ/capstone_2022](https://github.com/HcaZ
 
 ## Acknowledgments
 
-- [Readme Template used](https://github.com/othneildrew/Best-README-Template)
+- [Readme Template](https://github.com/othneildrew/Best-README-Template)
 - [GitHub Markdown Emojis :stuck_out_tongue_closed_eyes:](https://gist.github.com/rxaviers/7360908)
+- [Tutorial on Flask website building](https://www.youtube.com/watch?v=dam0GPOAvVI)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -1,3 +1,6 @@
+<!-- Note that this is the base template. Everything written on this page will show
+up on all of your pages. -->
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -29,7 +32,7 @@
       different python things, like if statements, a for loop, or even an expression you want to evaluate.
       The 'block' is a special Jinja thing, which means that you are defining a block in this base template
       that can be overriden in a child template. Child template inherits the base template, but whatever you
-      put inside of these blockscan be changed. This line above allows our child templates to change the title
+      put inside of these blocks can be changed. This line above allows our child templates to change the title
       of the page. -->
   </head>
   <body>
@@ -53,13 +56,14 @@
         <div class="navbar-nav">
           <!-- This is a div class for actual navigation items -->
           {% if user.is_authenticated %}
+          <!-- The below two HTML elements only show when a user is logged in. -->
           <!-- With this curly-brace + percent-sign, you can put any Python expression it, but
             just make sure that you end statements that usually gets indented in python with a "end" + "statement"
             e.g. if, elif, else, then endif, because you cannot indent here in Jinga, unlike you could with Python -->
           <a
             class="nav-item nav-link"
             id="home"
-            href="/"
+            href="/user-home"
             >Home</a
           >
           <a
@@ -69,6 +73,13 @@
             >Logout</a
           >
           {% else %}
+          <!-- The below three HTML elements only show when no user is logged in. -->
+          <a
+            class="nav-item nav-link"
+            id="home"
+            href="/"
+            >Home</a
+          >
           <a
             class="nav-item nav-link"
             id="login"
@@ -85,24 +96,34 @@
         </div>
       </div>
     </nav>
-
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
+    <!-- Below is how you get flashed messages from Flask and make it interpretable in a HTML
+      environment. Notice how true is not True in Jenga. -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    <!-- If there are any messages -->
+    {% if messages %}
+    <!-- Looping over the category and the message in the messages -->
+    {% for category, message in messages %}
+    <!-- If it was an error message -->
+    {% if category == 'error' %}
+    <!-- Bootstrap class for the alert, a dismissable red alert (red given by the danger). -->
     <div
       class="alert alert-danger alter-dismissable fade show"
       role="alert"
     >
       {{ message }}
+      <!-- Button for dismissing the alert -->
       <button
         type="button"
         class="close"
         data-dismiss="alert"
       >
+        <!-- A fancy icon that shows itself in the button -->
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    {% else %}
+
+    <!-- Below is for the other case of the alert, in case that it's a success. -->
+    {% elif category == 'success' %}
     <div
       class="alert alert-success alter-dismissable fade show"
       role="alert"
@@ -116,6 +137,24 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
+
+    <!-- Below is for the other case of the alert, in case that it's a warning. -->
+    {% else %}
+    <div
+      class="alert alert-warning alter-dismissable fade show"
+      role="alert"
+    >
+      {{ message }}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <!-- End all of the "indents" that we have started above -->
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
     <div class="container">{% block content %} {% endblock %}</div>
