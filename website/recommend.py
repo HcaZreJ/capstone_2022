@@ -11,6 +11,8 @@ import random as rd
 import scipy.stats as sts
 
 # Load news data into runtime memory
+# Note: This relational directory is fine, because the main.py file is in the outmost folder,
+# which sets the working directory to be there when it is ran.
 df = pd.read_csv('data_crawling_and_transformation/data_v2.csv', header=0, index_col=0, dtype=str,
                  parse_dates=['publishedAt'], infer_datetime_format=True)
 embeddings = np.load("data_crawling_and_transformation/embeddings_v2.npy")
