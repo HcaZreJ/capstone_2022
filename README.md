@@ -66,7 +66,7 @@ To see how this works, navigate to the top and click on "View Demo".
 Here are the major frameworks and libraries used to build this project.
 
 - [<img width="184" alt="截屏2022-12-11 15 44 00" src="https://user-images.githubusercontent.com/77333293/206892061-85b0876d-aea0-4522-97f5-5a9a1968e6db.png">](https://newsapi.org/)
-- [<img width="184" src="https://user-images.githubusercontent.com/77333293/206892313-9addec46-4c17-4eed-816a-3ff93367939f.png">](https://radimrehurek.com/gensim/)
+- [<img width="184" src="https://user-images.githubusercontent.com/77333293/230166191-39767201-baca-45af-9eff-afbf408cf7c3.png">](https://tfhub.dev/google/universal-sentence-encoder/4)
 - [<img width="184" src="https://user-images.githubusercontent.com/77333293/206893467-b8d22065-66cb-48fa-92c6-c9df57dcf48e.png">](https://numpy.org/)
 - [<img width="184" src="https://user-images.githubusercontent.com/77333293/206893469-d4f97224-0401-4ad2-b2b3-1498faa25e8b.png">](https://pandas.pydata.org/)
 
