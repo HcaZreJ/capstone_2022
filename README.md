@@ -13,9 +13,8 @@
   <p align="center">
     News Recommendations tailored to your preference, for efficient news reading.
     <br />
-    <!--
-    <a href="https://github.com/HcaZreJ/capstone_2022">View Demo</a>
-    ·-->
+    <a href="https://youtu.be/y8gM-oZql2o">View Demo</a>
+    ·
     <a href="https://colab.research.google.com/drive/1R9tvOwg35IeKIdiRJV9KJlMK0YSKWQRp?usp=s%20haring#scrollTo=F2rhdN40r4Tq">Colab Version</a>
     ·
     <a href="https://github.com/HcaZreJ/capstone_2022/issues">Report Bug</a>

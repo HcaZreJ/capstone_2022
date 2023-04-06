@@ -5,43 +5,112 @@ It generates 6 recommendations to the user based on the learned preference. -->
 content %}
 <br />
 
-<!-- Create a form so that we can receive ratings from the user. -->
-<form method="post">
-  <h3 align="center">Welcome, {{ user.first_name }}</h3>
+<h3 align="center">Welcome, {{ user.first_name }}</h3>
 
-  <p class="text-center">Here are a few recommendations for you:</p>
+<p class="text-center">Here are a few recommendations for you:</p>
 
-  <p class="text-center">
-    Read these news articles, and give us a rating on how often would you like
-    to see news articles like this, so that we can keep improving the
-    recommendations.
-  </p>
+<p class="text-center">
+  To keep improving the recommender, keep rating the articles!
+</p>
 
-  <p class="text-center">0 = I do not want to see this at all.</p>
-  <p class="text-center">5 = I want to see this all the time.</p>
-
-  <p class="text-center">
-    A high score prompts the recommender to recommend similar articles, while a
-    low score prompts the recommender to recommend less similar articles.
-  </p>
-
-  <!-- Bootstrap class to show a list of items -->
-  <ul
-    class="list-group"
-    id="recommendations"
+<p>
+  <!-- A collapsible instruction section. -->
+  <button
+    class="btn btn-primary"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapseExample"
+    aria-expanded="false"
+    aria-controls="collapseExample"
   >
-    <!-- Looping over all 6 recommendations generated, display them one-by-one. -->
-    {% for recommendation in recommendations %}
-    <li class="list-group-item">
-      <!-- Still needs some form here that allows User to give some sort of rating here -->
+    Instructions in case you forgot
+  </button>
+</p>
+<div
+  class="collapse"
+  id="collapseExample"
+>
+  <div class="card card-body">
+    <p>0 = I do not want to see this at all.</p>
+    <p>5 = I want to see this all the time.</p>
+    <p>
+      A high score prompts the recommender to recommend similar articles, while
+      a low score prompts the recommender to recommend less similar articles.
+    </p>
+  </div>
+</div>
 
-      <a href="{{ recommendation['url'] }}"
-        ><h3>{{ recommendation['title'] }}</h3></a
+<!-- A button that refreshes the page. -->
+<a href="{{ url_for('client.user_home') }}"
+  ><button
+    type="refresh"
+    class="btn btn-primary"
+  >
+    Refresh
+  </button></a
+>
+<br />
+
+<!-- Bootstrap class to show a list of items -->
+<ul
+  class="list-group"
+  id="recommendations"
+>
+  <!-- Looping over all 6 recommendations generated, display them one-by-one. -->
+  {% for i in iterator %}
+  <li class="list-group-item">
+    <!-- Create a form so that we can receive ratings from the user. -->
+    <form method="post">
+      <h4>
+        <a href="{{ recommendations[i]['url'] }}"
+          >{{ recommendations[i]['title'] }}</a
+        >
+      </h4>
+      <p>{{ recommendations[i]['content'] }}</p>
+
+      <!-- Bootstrap form class for a rating selection -->
+      <div class="form-group">
+        <label for="rating">Please Rate</label>
+        <select
+          class="form-control"
+          id="rating"
+          name="rating"
+        >
+          <option>0</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <!-- Hidden input field to retrieve the article'id so the back end can identify. -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          id="newId"
+          name="newsId"
+          value="{{ recommendations[i].name }}"
+        />
+      </div>
+      <!-- Hidden input field to retrieve the article's place in list so the back end can identify. -->
+      <div class="form-group">
+        <input
+          type="hidden"
+          id="position"
+          name="position"
+          value="{{ i }}"
+        />
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
       >
-      <p>{{ recommendation['content'] }}</p>
-    </li>
-    {% endfor %}
-  </ul>
-</form>
+        Submit
+      </button>
+    </form>
+  </li>
+  {% endfor %}
+</ul>
 
 {% endblock %}

@@ -5,48 +5,54 @@ It generates 6 recommendations to the user based on the learned preference. -->
 block content %}
 <br />
 
+<h3 align="center">Welcome, {{ user.first_name }}</h3>
+
+<p class="text-center">
+  Since you are a first-time user, we would need you to rate 6 News Articles
+  shown here to get an initial capture of your preference.
+</p>
+
+<p class="text-center">
+  Read these news articles, and give us a rating on how often would you like to
+  see news articles like this?
+</p>
+
+<p class="text-center">0 = I do not want to see this at all.</p>
+<p class="text-center">5 = I want to see this all the time.</p>
+
+<p class="text-center">
+  A high score prompts the recommender to recommend similar articles, while a
+  low score prompts the recommender to recommend less similar articles.
+</p>
+
+<p class="text-center">
+  You must give a score to all 6 articles, or else we cannot generate any
+  subsequent recommendations to you.
+</p>
+
 <!-- Create a form so that we can receive ratings from the user. -->
 <form method="post">
-  <h3 align="center">Welcome, {{ user.first_name }}</h3>
-
-  <p class="text-center">
-    Since you are a first-time user, we would need you to rate 6 News Articles
-    shown here to get an initial capture of your preference.
-  </p>
-
-  <p class="text-center">
-    Read these news articles, and give us a rating on how often would you like
-    to see news articles like this?
-  </p>
-
-  <p class="text-center">0 = I do not want to see this at all.</p>
-  <p class="text-center">5 = I want to see this all the time.</p>
-
-  <p class="text-center">
-    A high score prompts the recommender to recommend similar articles, while a
-    low score prompts the recommender to recommend less similar articles.
-  </p>
-
   <!-- Bootstrap class to show a list of items -->
   <ul
     class="list-group"
     id="recommendations"
   >
     <!-- Looping over all 6 recommendations generated, display them one-by-one. -->
-    {% for recommendation in recommendations %}
+    {% for i in iterator %}
     <li class="list-group-item">
-      <!-- Still needs some form here that allows User to give some sort of rating here -->
+      <h4>
+        <a href="{{ recommendations[i]['url'] }}"
+          >{{ recommendations[i]['title'] }}</a
+        >
+      </h4>
+      <p>{{ recommendations[i]['content'] }}</p>
 
-      <p>{{ recommendation['title'] }}</p>
-      <p>{{ recommendation['url'] }}</p>
-      <p>{{ recommendation['content'] }}</p>
-
-      <!-- Bootstrap class for a rating selection -->
+      <!-- Bootstrap form class for a rating selection -->
       <div class="form-group">
         <label for="rating">Please Rate</label>
         <select
           class="form-control"
-          id="rating"
+          id="rating{{i}}"
           name="rating{{i}}"
         >
           <option>0</option>
@@ -57,14 +63,17 @@ block content %}
           <option>5</option>
         </select>
       </div>
-      <button
-        type="submit"
-        class="btn btn-primary"
-      >
-        Submit
-      </button>
     </li>
     {% endfor %}
   </ul>
+  <br />
+  <button
+    type="submit"
+    class="btn btn-primary"
+  >
+    Submit
+  </button>
+  <br />
 </form>
+
 {% endblock %}

@@ -40,11 +40,14 @@ def non_first_recommend(user, x=6):
     rated_news = user.news
 
     # Obtain a list of all scores rated, and a list of news ids
+    # Note: news_id is stored as bytes in the database and needs to be 
+    # converted back to int to be used in Python. The order is 'little'
     all_scores = []
     news_ids = []
     for a_rated_news in rated_news:
         all_scores.append(a_rated_news.rating)
         news_ids.append(a_rated_news.news_id)
+        #news_ids.append(int.from_bytes(a_rated_news.news_id, 'little'))
 
     # Calculate a sum score & a cumsum score
     sum_score = np.sum(all_scores)
@@ -52,6 +55,7 @@ def non_first_recommend(user, x=6):
 
     # Create a holder to place all the news recommended
     recommendations = []
+    recommend_ids = []
 
     # Generate x recommendations
     for i in range(x):
@@ -66,7 +70,7 @@ def non_first_recommend(user, x=6):
         # sample from each of the Normal d., then look for the closest article & recommend
 
         # Obtain Article's vector
-        article_vec = embeddings[user.news[place].news_id, :]
+        article_vec = embeddings[news_ids[place], :]
         # Create an empty sample vector of same dimensions
         sampled_vec = np.zeros(article_vec.shape)
 
@@ -75,31 +79,39 @@ def non_first_recommend(user, x=6):
         for i, dim_value in enumerate(article_vec):
             sampled_vec[i] = sts.norm.rvs(loc=dim_value, scale=sigma)
 
-            # Find the index of the article in our database that the user have not seen 
-            # before, and is most similar to the sampled article vector
-            k = -1
-            similarities = np.inner(sampled_vec, embeddings)
-            sorted_similarities = np.sort(similarities)
-            # Establish an infinite loop to find the an article not seen by the user
-            while True:
-                next_largest_similarity_score = sorted_similarities[k]
-                # This is the index for the next most similar article
-                index = np.where(similarities == next_largest_similarity_score)[0][0]
-                
-                # Compare the next most similar article against every article that the user has seen
-                for seen_news in news_ids:
-                    # If the user has seen this article before
-                    if np.array_equal(embeddings[seen_news], embeddings[index]):
-                        # We decrement k by 1, to look for the next most similar, and break out of the for loop
-                        k -= 1
-                        break
-                # This else-clause executes when the for loop completes as normal, meaning
-                # the user has not seen this article before, so we break out of the outer infinite while loop
-                else:
-                    break
+        # Find the index of the article in our database that the user have not seen 
+        # before, and is most similar to the sampled article vector
+        k = -1
+        similarities = np.inner(sampled_vec, embeddings)
+        sorted_similarities = np.sort(similarities)
+        # Establish an infinite loop to find the an article not seen by the user
+        while True:
+            next_largest_similarity_score = sorted_similarities[k]
+            # This is the index for the next most similar article
+            index = np.where(similarities == next_largest_similarity_score)[0][0]
 
-            # Add all relevant data of this news article to the list
-            recommendations.append(df.iloc[index, :])
+            # Check to verify this index is not already one of the recommended articles
+            if index in recommend_ids:
+                k -= 1
+                continue
+            
+            # Compare the next most similar article against every article that the user has seen,
+            # or is already in our recommendations
+            for seen_news in news_ids:
+                # If the user has seen this article before
+                if np.array_equal(embeddings[seen_news], embeddings[index]):
+                    # We decrement k by 1, to look for the next most similar, and break out of the for loop
+                    k -= 1
+                    break
+            # This else-clause executes when the for loop completes as normal, meaning
+            # the user has not seen this article before, so next we need to compare against every article 
+            # in our recommendations
+            else:
+                break
+
+        # Add all relevant data of this news article to the list
+        recommendations.append(df.iloc[index, :])
+        recommend_ids.append(index)
 
     return recommendations
 

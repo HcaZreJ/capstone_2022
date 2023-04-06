@@ -13,9 +13,6 @@ from flask_login import login_user, login_required, logout_user, current_user
 # Password hashing
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Email verification
-import re
-
 # Blueprint declaration, so __init__.py can import everything below using register_blueprint()
 auth = Blueprint('auth', __name__)
 
@@ -106,7 +103,7 @@ def sign_up():
             flash('Email already exists.', category='error')
         
         # Sanity checks on the info entered in the form
-        elif re.match("^[a-zA-Z0-9-_]+@[a-zA-Z0-9]+\.[a-z]{1,3}$", email) != True:
+        elif len(email) < 3:
             flash('You must enter a valid email.', category='error')
         elif len(first_name) < 1:
             flash('You must enter a first name.', category='error')
