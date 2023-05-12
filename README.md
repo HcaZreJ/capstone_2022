@@ -67,7 +67,7 @@ Initially, I wanted to create & deploy a Flask web app that will be widely acces
 <br/>
 
 <p align="center">
-<img width="500" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/6b488d43-a86e-41c7-8c8f-4836c7b18d09" align="center">
+<img width="1000" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/6b488d43-a86e-41c7-8c8f-4836c7b18d09" align="center">
 </p>
 
 <p align="center">
@@ -97,7 +97,7 @@ Each user’s preference is modeled as a probability density function (pdf) on a
 <br/>
 
 <p align="center">
-<img width=300 alt="PDF of User Preference" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/c8194472-45e4-432e-97bc-53e27003c82e">
+<img width=450 alt="PDF of User Preference" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/c8194472-45e4-432e-97bc-53e27003c82e">
 </p>
 
 <p align="center">
