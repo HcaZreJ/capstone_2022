@@ -66,9 +66,15 @@ Initially, I wanted to create & deploy a Flask web app that will be widely acces
 
 <br/>
 
-<center><img width="500" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/fb281d5d-23af-4281-bb68-565873f93c7b"></center>
+<p align="center">
+<img width="500" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/6b488d43-a86e-41c7-8c8f-4836c7b18d09" align="center">
+</p>
 
-<center><i>Figure 1 - An illustration of the web app's system. The black arrows demonstrate what happens when a GET request is sent to the server (when the user requests a page). The blue arrows demonstrate what happens when a POST request is sent to the server (when the user provides feedback to some news recommendation). The green arrow demonstrates the web crawler script saving crawled news article data into the database.</i></center>
+<p align="center">
+  <i>
+    Figure 1 - An illustration of the web app's system. The black arrows demonstrate what happens when a GET request is sent to the server (when the user requests a page). The blue arrows demonstrate what happens when a POST request is sent to the server (when the user provides feedback to some news recommendation). The green arrow demonstrates the web crawler script saving crawled news article data into the database.
+  </i>
+</p>
 
 <br/>
 
@@ -90,9 +96,15 @@ Each user’s preference is modeled as a probability density function (pdf) on a
 
 <br/>
 
-<center><img alt="PDF of User Preference" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/d6de400f-d104-4bd1-b24e-e6ed306744c0"></center>
+<p align="center">
+<img width=300 alt="PDF of User Preference" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/c8194472-45e4-432e-97bc-53e27003c82e">
+</p>
 
-<center><i>Figure 2 - An illustration of a Probability Density Function that captures a user’s preference. News articles 1 and 2 are shown to the user and received scores of 2 and 5, respectively. The normal distributions of user’s preference would look something like the above, with the x-axis pretending to be the 512-dimensional vector space that captures the semantic difference of articles and the y-axis being the probability density.</i></center>
+<p align="center">
+  <i>
+    Figure 2 - An illustration of a Probability Density Function that captures a user’s preference. News articles 1 and 2 are shown to the user and received scores of 2 and 5, respectively. The normal distributions of user’s preference would look something like the above, with the x-axis pretending to be the 512-dimensional vector space that captures the semantic difference of articles and the y-axis being the probability density.
+  </i>
+</p>
 
 <br/>
 
