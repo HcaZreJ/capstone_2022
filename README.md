@@ -30,6 +30,9 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
@@ -41,6 +44,7 @@
         <li><a href="#google-universal-sentence-encoder">Google Universal Sentence Encoder</a></li>
       </ul>
     </li>
+    <li><a href="#feedback">Feedback</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -50,13 +54,39 @@
 
 ## About The Project
 
-Capstone Project of Data Science major student Zichen Zhu at Minerva University. The goal of the project is to develop a product that will help myself read news more efficiently.
+Capstone Project of Data Science major student Zichen Zhu at Minerva University. The goal of the project is to develop a product that will help users read news more efficiently.
 
-Initially, I intended to create a Flask web app that will be deployed and widely accessible. However, I later realized that the Sentence Encoder I used is too big, and it will cost money to be deployed. So instead here is the web app's code that can be downloaded and deployed locally using Flask.
+### Background
 
-The web app allows you to create an account and enjoy news recommendations personalized to your preference. Upon sign up, the web app will ask you to rate 6 articles, on a scale of 0 to 5, with 0 being "I do not want to see this at all" up to 5 being "I want to see this all the time." This gives the app an initial capture of your preference, then on subsequent log in, you will see 6 news recommendations tailored to your preference, which you can also rate to help the app improve.
+As someone who is always the last one amongst my friends to know what is happening around the world, I was quite unsatisfied with the existing news websites/web apps. They either fed all of their news to you without any preference learning, or could not cover a wide variety of topics. Reading news through them was painful and inefficient. Thus I decided to create my own web app, which could both gather news from different websites and feed news tailored to the user's preference.
 
-To see how this works, navigate to the top and click on "View Demo".
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Product
+
+Initially, I wanted to create & deploy a Flask web app that will be widely accessible. However, I later realized that the Sentence Encoder I used is too big, and it will cost money to be deployed. So instead I uploaded the web app's code to Github. In the future I will continue to improve the code of this app, and hope to actually deploy it one day.
+
+The recommender is guaranteed to perform better than random recommendations, however it suffers from the same problem that all content-based filtering recommendation engines suffer from: lack of novelty. Its recommendations are relatively predictable and exacerbates the "media bubble" problem. Future iterations will work on solving this problem.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### How it works
+
+<b>Data Crawling and Transformation</b>
+
+A script (`news_crawl_v2.py`) scrapes news articles’ information from reputable news websites daily and stores them into a CSV file (`data_v2.csv`).
+
+Another script (`news_to_vector_v2.py`) then utilizes the Google Universal Sentence Encoder (GUSE) to transform the headlines of the articles into 512-dimensional vectors. GUSE is a pre-trained sentence embedding model that can transform universal sentences into vectors in a 512-dimensional space. The angle between any two vectors represents the semantic similarity (min 0, max 1) between them. These transformed vectors and a semantic similarity matrix are stored as NPY files (`embeddings_v2.npy` & `similarity_matrix_v2.npy`).
+
+<b>User representation</b>
+
+Each user’s preference is modeled as a probability density function (pdf) on another dimension orthogonal to the 512 dimensions provided by GUSE. Whenever an article is recommended to the user, feedback is inquired from the user on “How often would you like to see news articles like this?”. The feedback is on a 6-point scale, with 0 being “I do not want to see this at all” up to 5 being “I want to see this all the time.” Whenever feedback is received, a 512-dimensional normal distribution is built around the recommended article, to represent the user's preference in articles of similar semantics. A higher score creates a taller one while a low score creates a smaller one. To illustrate:
+
+
+
+Then whenever we need to generate a new recommendation to the user, we just draw a sample from this 512-dimensional pdf and look for the article in our database closest to this sampled vector, of which the user has not seen before.
+
+To see how the web app actually looks, navigate to the top and click on "View Demo". To experience a low-end beta version of this web app, visit: https://colab.research.google.com/drive/1R9tvOwg35IeKIdiRJV9KJlMK0YSKWQRp?usp=sharing
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -72,8 +102,6 @@ Here are the major frameworks and libraries used to build this project.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
-
-To check out a low-end beta version of this web app, visit: https://colab.research.google.com/drive/1R9tvOwg35IeKIdiRJV9KJlMK0YSKWQRp?usp=sharing
 
 To run the web app locally, you must have Python 3.9.10 locally, then setup your environment following the steps below.
 
@@ -103,6 +131,8 @@ Fork this repo or download it, then run:
 python </path/to/project/folder>/main.py
 ```
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### News API
 
 The program includes sending requests to the Newsapi website to obtain recent news article links, if you used mine in the script, it might return no results because I am using a free developer's account that is limited to 200 requests per day. It is recommended that you register your own free Newsapi account and supply it to the web crawling before running it. Here are the steps:
@@ -119,7 +149,19 @@ The program includes sending requests to the Newsapi website to obtain recent ne
 
 The program also uses a pre-trained Google Universal Sentence Encoder model that is 1.04GB on disk and stored in a folder format. Before running the program, you would need to download the zipped folder, and store it under the same directory as the news_to_vector_v2.py file. The one that this GitHub Repo uses is managed by Git LFS, which might not come along with all the other scripts if you forked this repo.
 
-Documentation & downloading for pre-trained Google Universal Sentence Encoder can be found [here](https://tfhub.dev/google/universal-sentence-encoder/4).
+Documentation & downloading for pre-trained Google Universal Sentence Encoder can be found here: https://tfhub.dev/google/universal-sentence-encoder/4.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FEEDBACK -->
+
+## Feedback
+
+If you have any feedback on the project, you can write them here: https://forms.gle/uV7tropStSp5Cccr9
+
+Anything is greatly appreciated, as it will help me improve my product.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 
@@ -150,7 +192,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 ## Contact
 
-Zichen Zhu - zachzhu@uni.minerva.edu
+Zichen Zhu - zachzhu@uni.minerva.edu / zichenzh@andrew.cmu.edu
 
 Project Link: [https://github.com/HcaZreJ/capstone_2022](https://github.com/HcaZreJ/capstone_2022)
 
