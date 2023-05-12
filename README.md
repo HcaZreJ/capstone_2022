@@ -64,7 +64,13 @@ As someone who is always the last one amongst my friends to know what is happeni
 
 Initially, I wanted to create & deploy a Flask web app that will be widely accessible. However, I later realized that the Sentence Encoder I used is too big, and it will cost money to be deployed. So instead I uploaded the web app's code to Github. In the future I will continue to improve the code of this app, and hope to actually deploy it one day. Below is an illustration of the web app:
 
-<img width="1425" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/fb281d5d-23af-4281-bb68-565873f93c7b">
+<br/>
+
+<center><img width="500" alt="System illustration" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/fb281d5d-23af-4281-bb68-565873f93c7b"></center>
+
+<center><i>Figure 1 - An illustration of the web app's system. The black arrows demonstrate what happens when a GET request is sent to the server (when the user requests a page). The blue arrows demonstrate what happens when a POST request is sent to the server (when the user provides feedback to some news recommendation). The green arrow demonstrates the web crawler script saving crawled news article data into the database.</i></center>
+
+<br/>
 
 The recommender is guaranteed to perform better than random recommendations, however it suffers from the same problem that all content-based filtering recommendation engines suffer from: lack of novelty. Its recommendations are relatively predictable and exacerbates the "media bubble" problem. Future iterations will work on solving this problem.
 
@@ -82,7 +88,13 @@ Another script (`news_to_vector_v2.py`) then utilizes the Google Universal Sente
 
 Each user’s preference is modeled as a probability density function (pdf) on another dimension orthogonal to the 512 dimensions provided by GUSE. Whenever an article is recommended to the user, feedback is inquired from the user on “How often would you like to see news articles like this?”. The feedback is on a 6-point scale, with 0 being “I do not want to see this at all” up to 5 being “I want to see this all the time.” Whenever feedback is received, a 512-dimensional normal distribution is built around the recommended article, to represent the user's preference in articles of similar semantics. A higher score creates a taller one while a low score creates a smaller one. To illustrate:
 
-![PDF of User Preference](https://github.com/HcaZreJ/capstone_2022/assets/77333293/d6de400f-d104-4bd1-b24e-e6ed306744c0)
+<br/>
+
+<center><img alt="PDF of User Preference" src="https://github.com/HcaZreJ/capstone_2022/assets/77333293/d6de400f-d104-4bd1-b24e-e6ed306744c0"></center>
+
+<center><i>Figure 2 - An illustration of a Probability Density Function that captures a user’s preference. News articles 1 and 2 are shown to the user and received scores of 2 and 5, respectively. The normal distributions of user’s preference would look something like the above, with the x-axis pretending to be the 512-dimensional vector space that captures the semantic difference of articles and the y-axis being the probability density.</i></center>
+
+<br/>
 
 Then whenever we need to generate a new recommendation to the user, we just draw a sample from this 512-dimensional pdf and look for the article in our database closest to this sampled vector, of which the user has not seen before.
 
